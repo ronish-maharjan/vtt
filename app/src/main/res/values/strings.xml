@@ -5,7 +5,7 @@
 
     <!-- Setup Activity -->
     <string name="setup_title">Whistle Keyboard Setup</string>
-    <string name="setup_step_1">1. Enable the keyboard in Settings → Languages & input → On-screen keyboard → Manage keyboards → Turn on "Whistle Voice Keyboard"</string>
+    <string name="setup_step_1">1. Enable the keyboard in Settings → Languages &amp; input → On-screen keyboard → Manage keyboards → Turn on "Whistle Voice Keyboard"</string>
     <string name="setup_step_2">2. Select it as your active input method: tap a text field → keyboard icon → Choose "Whistle Voice Keyboard"</string>
     <string name="setup_step_3">3. Start the Termux transcription server (see below)</string>
     <string name="setup_step_4">4. Grant microphone permission when prompted</string>
