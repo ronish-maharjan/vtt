@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/surface"
+        android:paddingBottom="16dp">
+
+        <!-- Top row: switch keyboard hint -->
+        <TextView
+            android:id="@+id/switchKeyboardHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/keyboard_switch_keyboard"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <!-- Main area with microphone button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:minHeight="120dp">
+
+            <Button
+                android:id="@+id/micButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/mic_button_background"
+                android:contentDescription="@string/keyboard_mic_idle"
+                android:stateListAnimator="@null" />
+
+            <!-- Recording indicator overlay -->
+            <View
+                android:id="@+id/recordingIndicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/recording_indicator"
+                android:visibility="gone" />
+
+            <!-- Processing indicator overlay -->
+            <ProgressBar
+                android:id="@+id/processingIndicator"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            <!-- Error icon overlay -->
+            <TextView
+                android:id="@+id/errorIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="!"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <!-- Error message -->
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:textColor="@color/error"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</merge>
