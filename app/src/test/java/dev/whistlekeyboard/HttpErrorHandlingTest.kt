@@ -32,7 +32,7 @@ class HttpErrorHandlingTest {
 
     @Test
     fun testHttp500() {
-        val error = handleHttpError(500, "Internal Server Error"))
+        val error = handleHttpError(500, "Internal Server Error")
         assertTrue(error.contains("HTTP 500"))
         assertTrue(error.contains("Internal Server Error"))
     }
