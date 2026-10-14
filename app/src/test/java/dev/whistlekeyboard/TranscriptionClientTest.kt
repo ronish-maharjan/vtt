@@ -28,46 +28,56 @@ class TranscriptionClientTest {
     @Test
     fun testParseEmptyText() {
         val jsonText = """{"text": "", "language": "en"}"""
-        val exception = assertThrows<IllegalArgumentException> {
+        try {
             parseTranscriptionResponse(jsonText)
+            fail("Expected IllegalArgumentException")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message!!.contains("Empty"))
         }
-        assertTrue(exception.message!!.contains("Empty"))
     }
 
     @Test
     fun testParseMissingTextField() {
         val jsonText = """{"language": "en", "ttft_ms": 100}"""
-        val exception = assertThrows<IllegalArgumentException> {
+        try {
             parseTranscriptionResponse(jsonText)
+            fail("Expected IllegalArgumentException")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message!!.contains("Empty"))
         }
-        assertTrue(exception.message!!.contains("Empty"))
     }
 
     @Test
     fun testParseWhitespaceOnlyText() {
         val jsonText = """{"text": "   ", "language": "en"}"""
-        val exception = assertThrows<IllegalArgumentException> {
+        try {
             parseTranscriptionResponse(jsonText)
+            fail("Expected IllegalArgumentException")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message!!.contains("Empty"))
         }
-        assertTrue(exception.message!!.contains("Empty"))
     }
 
     @Test
     fun testParseMalformedJson() {
         val jsonText = "{invalid json}"
-        val exception = assertThrows<Exception> {
+        try {
             parseTranscriptionResponse(jsonText)
+            fail("Expected Exception")
+        } catch (e: Exception) {
+            assertNotNull(e.message)
         }
-        assertNotNull(exception.message)
     }
 
     @Test
     fun testParseNullText() {
         val jsonText = """{"text": null, "language": "en"}"""
-        val result = parseTranscriptionResponse(jsonText)
         // JSONObject.optString returns empty string for null
-        assertThrows<IllegalArgumentException> {
+        try {
             parseTranscriptionResponse(jsonText)
+            fail("Expected IllegalArgumentException")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message!!.contains("Empty"))
         }
     }
 
