@@ -88,10 +88,10 @@ class MainActivity : AppCompatActivity() {
 
         // Update permission button state
         if (hasPermission) {
-            grantPermissionButton.text = getString(R.string.setup_permission_granted)
+            grantPermissionButton.setText(getString(R.string.setup_permission_granted))
             grantPermissionButton.isEnabled = false
         } else {
-            grantPermissionButton.text = getString(R.string.setup_grant_permission)
+            grantPermissionButton.setText(getString(R.string.setup_grant_permission))
             grantPermissionButton.isEnabled = true
         }
     }
@@ -120,12 +120,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun testServerConnection() {
         testConnectionButton.isEnabled = false
-        testConnectionButton.text = "Testing..."
+        testConnectionButton.setText("Testing...")
 
         transcriptionClient.checkHealth(object : TranscriptionClient.HealthCheckCallback {
             override fun onHealthy() {
                 runOnUiThread {
-                    testConnectionButton.text = getString(R.string.setup_test_connection)
+                    testConnectionButton.setText(getString(R.string.setup_test_connection))
                     testConnectionButton.isEnabled = true
                     Toast.makeText(this@MainActivity, R.string.setup_connection_ok, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "Health check passed")
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onUnhealthy(error: String) {
                 runOnUiThread {
-                    testConnectionButton.text = getString(R.string.setup_test_connection)
+                    testConnectionButton.setText(getString(R.string.setup_test_connection))
                     testConnectionButton.isEnabled = true
                     val msg = getString(R.string.setup_connection_failed, error)
                     Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()

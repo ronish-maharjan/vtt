@@ -1,17 +1,18 @@
 package dev.whistlekeyboard
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.inputmethodservice.InputMethodService
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputConnection
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import java.io.File
 
 /**
  * Main Input Method Service for the Whistle Voice Keyboard.
@@ -35,7 +36,7 @@ class VoiceKeyboardService : InputMethodService() {
     }
 
     override fun onCreateInputView(): View {
-        keyboardView = KeyboardView(this, null).apply {
+        keyboardView = KeyboardView(this, null, 0).apply {
             setOnMicTapListener { onMicTapped() }
             setOnSwitchKeyboardListener { onSwitchKeyboard() }
         }

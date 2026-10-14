@@ -18,9 +18,11 @@ class TranscriptionClient(
     private val readTimeoutMs: Int = 30000
 ) {
 
-    private const val HEALTH_PATH = "/health"
-    private const val TRANSCRIBE_PATH = "/transcribe"
-    private const val TAG = "TranscriptionClient"
+    companion object {
+        private const val HEALTH_PATH = "/health"
+        private const val TRANSCRIBE_PATH = "/transcribe"
+        private const val TAG = "TranscriptionClient"
+    }
 
     interface TranscriptionCallback {
         fun onSuccess(text: String)

@@ -19,8 +19,10 @@ import androidx.core.content.ContextCompat
  */
 class KeyboardView(
     context: Context,
-    attrs: AttributeSet
-) : View(context, attrs) {
+    attrs: AttributeSet,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {  
+    @JvmOverloads constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     enum class State {
         IDLE,
@@ -107,9 +109,9 @@ class KeyboardView(
         switchPaint.getTextBounds(switchText, 0, switchText.length, textBounds)
         switchRect.set(
             centerX - textBounds.width() / 2f - 24,
-            height - textBounds.height() - 40,
+            height.toFloat() - textBounds.height() - 40,
             centerX + textBounds.width() / 2f + 24,
-            height - 20
+            height.toFloat() - 20
         )
     }
 

@@ -173,8 +173,11 @@ class AudioRecorder(
             val pcmSize = pcmData.size - 44 // Subtract header size
 
             if (pcmSize > 0) {
-                file.writeBytes(buildWavHeader(pcmSize.toLong()))
-                file.write(pcmData, 44, pcmSize.toInt())
+                val header = buildWavHeader(pcmSize.toLong())
+                val outputStream = FileOutputStream(file)
+                outputStream.write(header)
+                outputStream.write(pcmData, 44, pcmSize.toInt())
+                outputStream.close()
             }
         } catch (e: IOException) {
             onError?.invoke("Failed to finalize WAV file: ${e.message}")
