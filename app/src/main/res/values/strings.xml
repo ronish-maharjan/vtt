@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Whistle Keyboard</string>
+    <string name="keyboard_name">Whistle Voice Keyboard</string>
+    <string name="subtype_label">English (Voice)</string>
+
+    <!-- Setup Activity -->
+    <string name="setup_title">Whistle Keyboard Setup</string>
+    <string name="setup_step_1">1. Enable the keyboard in Settings → Languages & input → On-screen keyboard → Manage keyboards → Turn on "Whistle Voice Keyboard"</string>
+    <string name="setup_step_2">2. Select it as your active input method: tap a text field → keyboard icon → Choose "Whistle Voice Keyboard"</string>
+    <string name="setup_step_3">3. Start the Termux transcription server (see below)</string>
+    <string name="setup_step_4">4. Grant microphone permission when prompted</string>
+    <string name="setup_server_title">Termux Server</string>
+    <string name="setup_server_instruction">In Termux, run:\ncd ~/voice-typing\nnode server.js</string>
+    <string name="setup_server_port">Server runs on http://127.0.0.1:8765</string>
+    <string name="setup_test_connection">Test Server Connection</string>
+    <string name="setup_connection_ok">Server is reachable ✓</string>
+    <string name="setup_connection_failed">Server unreachable: %1$s</string>
+    <string name="setup_permission_title">Microphone Permission</string>
+    <string name="setup_permission_message">This keyboard needs microphone access to record speech for transcription.</string>
+    <string name="setup_grant_permission">Grant Permission</string>
+    <string name="setup_permission_granted">Permission granted ✓</string>
+    <string name="setup_permission_denied">Permission denied. Enable in Settings → Apps → Whistle Keyboard → Permissions.</string>
+
+    <!-- Keyboard UI -->
+    <string name="keyboard_mic_idle">Tap to record</string>
+    <string name="keyboard_mic_recording">Recording… tap to stop</string>
+    <string name="keyboard_mic_processing">Transcribing…</string>
+    <string name="keyboard_error_prefix">Error: </string>
+    <string name="keyboard_switch_keyboard">Switch Keyboard</string>
+</resources>
