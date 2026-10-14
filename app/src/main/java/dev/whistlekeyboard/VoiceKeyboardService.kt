@@ -120,8 +120,7 @@ class VoiceKeyboardService : InputMethodService() {
     }
 
     private fun checkRecordingPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestRecordingPermission() {

@@ -71,8 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateStatus() {
-        val hasPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED
+        val hasPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
 
         val sb = StringBuilder()
         sb.append(getString(R.string.setup_title)).append("\n\n")
