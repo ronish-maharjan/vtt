@@ -84,7 +84,7 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-                <Button
+                <ImageButton
                     android:id="@+id/backspaceButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -92,26 +92,20 @@
                     android:background="@drawable/circle_action_button_background"
                     android:contentDescription="@string/keyboard_backspace"
                     android:stateListAnimator="@null"
-                    android:drawableStart="@drawable/ic_backspace"
-                    android:drawablePadding="0dp"
-                    android:gravity="center"
-                    android:padding="0dp"
-                    android:textColor="@color/white"
-                    android:textSize="0sp" />
+                    android:src="@drawable/ic_backspace"
+                    android:scaleType="centerInside"
+                    android:padding="12dp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/enterButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/circle_action_button_background"
                     android:contentDescription="@string/keyboard_enter"
                     android:stateListAnimator="@null"
-                    android:drawableStart="@drawable/ic_enter"
-                    android:drawablePadding="0dp"
-                    android:gravity="center"
-                    android:padding="0dp"
-                    android:textColor="@color/white"
-                    android:textSize="0sp" />
+                    android:src="@drawable/ic_enter"
+                    android:scaleType="centerInside"
+                    android:padding="12dp" />
             </LinearLayout>
         </RelativeLayout>
 
