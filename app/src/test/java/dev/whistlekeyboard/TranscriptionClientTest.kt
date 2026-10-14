@@ -63,8 +63,9 @@ class TranscriptionClientTest {
         val jsonText = "{invalid json}"
         try {
             parseTestTranscriptionResponse(jsonText)
-            fail("Expected Exception")
-        } catch (e: Exception) {
+            fail("Expected JSONException")
+        } catch (e: org.json.JSONException) {
+            // JSONObject constructor throws JSONException for malformed JSON
             assertNotNull(e.message)
         }
     }
