@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 /**
- * Keyboard view with microphone button and switch keyboard hint.
+ * Keyboard view with microphone button, backspace, enter, and switch keyboard hint.
  * Normal keyboard size (not fullscreen).
  */
 class KeyboardView(
@@ -37,6 +37,8 @@ class KeyboardView(
 
     // Views
     private var micButton: Button? = null
+    private var backspaceButton: Button? = null
+    private var enterButton: Button? = null
     private var recordingIndicator: View? = null
     private var processingIndicator: ProgressBar? = null
     private var errorIcon: TextView? = null
@@ -46,6 +48,8 @@ class KeyboardView(
     // Callbacks
     var onMicTap: (() -> Unit)? = null
     var onSwitchKeyboard: (() -> Unit)? = null
+    var onBackspace: (() -> Unit)? = null
+    var onEnter: (() -> Unit)? = null
 
     // Animation
     private var pulseAnimation: Animation? = null
@@ -63,6 +67,8 @@ class KeyboardView(
 
     private fun setupViews() {
         micButton = findViewById(R.id.micButton)
+        backspaceButton = findViewById(R.id.backspaceButton)
+        enterButton = findViewById(R.id.enterButton)
         recordingIndicator = findViewById(R.id.recordingIndicator)
         processingIndicator = findViewById(R.id.processingIndicator)
         errorIcon = findViewById(R.id.errorIcon)
@@ -71,6 +77,20 @@ class KeyboardView(
 
         micButton?.setOnClickListener {
             onMicTap?.invoke()
+        }
+
+        backspaceButton?.setOnClickListener {
+            onBackspace?.invoke()
+        }
+
+        // Long press for continuous deletion
+        backspaceButton?.setOnLongClickListener {
+            onBackspace?.invoke()
+            true
+        }
+
+        enterButton?.setOnClickListener {
+            onEnter?.invoke()
         }
 
         switchKeyboardHint?.setOnClickListener {
@@ -131,6 +151,8 @@ class KeyboardView(
             background = ContextCompat.getDrawable(context, R.drawable.mic_button_background)
             contentDescription = context.getString(R.string.keyboard_mic_idle)
         }
+        backspaceButton?.isEnabled = true
+        enterButton?.isEnabled = true
         hideAllIndicators()
         errorMessageView?.visibility = View.GONE
         switchKeyboardHint?.visibility = View.VISIBLE
@@ -141,6 +163,8 @@ class KeyboardView(
             background = ContextCompat.getDrawable(context, R.drawable.mic_button_recording)
             contentDescription = context.getString(R.string.keyboard_mic_recording)
         }
+        backspaceButton?.isEnabled = false
+        enterButton?.isEnabled = false
         hideAllIndicators()
         recordingIndicator?.visibility = View.VISIBLE
         recordingIndicator?.startAnimation(pulseAnimation)
@@ -153,6 +177,8 @@ class KeyboardView(
             background = ContextCompat.getDrawable(context, R.drawable.mic_button_processing)
             contentDescription = context.getString(R.string.keyboard_mic_processing)
         }
+        backspaceButton?.isEnabled = false
+        enterButton?.isEnabled = false
         hideAllIndicators()
         processingIndicator?.visibility = View.VISIBLE
         processingIndicator?.startAnimation(rotateAnimation)
@@ -165,6 +191,8 @@ class KeyboardView(
             background = ContextCompat.getDrawable(context, R.drawable.mic_button_error)
             contentDescription = "Error"
         }
+        backspaceButton?.isEnabled = true
+        enterButton?.isEnabled = true
         hideAllIndicators()
         errorIcon?.visibility = View.VISIBLE
         errorMessageView?.apply {

@@ -39,6 +39,8 @@ class VoiceKeyboardService : InputMethodService() {
         keyboardView = KeyboardView(this, null, 0).apply {
             setOnMicTapListener { onMicTapped() }
             setOnSwitchKeyboardListener { onSwitchKeyboard() }
+            setOnBackspaceListener { onBackspace() }
+            setOnEnterListener { onEnter() }
         }
         return keyboardView!!
     }
@@ -119,6 +121,29 @@ class VoiceKeyboardService : InputMethodService() {
         imm.showInputMethodPicker()
     }
 
+    private fun onBackspace() {
+        val inputConnection = pendingInputConnection ?: currentInputConnection
+        inputConnection?.let {
+            // Delete one character before cursor
+            it.deleteSurroundingText(1, 0)
+            Log.d(TAG, "Backspace")
+        } ?: run {
+            Log.w(TAG, "No input connection for backspace")
+        }
+    }
+
+    private fun onEnter() {
+        val inputConnection = pendingInputConnection ?: currentInputConnection
+        inputConnection?.let {
+            // Send enter key event
+            it.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_ENTER))
+            it.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_ENTER))
+            Log.d(TAG, "Enter")
+        } ?: run {
+            Log.w(TAG, "No input connection for enter")
+        }
+    }
+
     private fun checkRecordingPermission(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
     }
@@ -181,5 +206,13 @@ class VoiceKeyboardService : InputMethodService() {
 
     private fun KeyboardView.setOnSwitchKeyboardListener(listener: () -> Unit) {
         this.onSwitchKeyboard = listener
+    }
+
+    private fun KeyboardView.setOnBackspaceListener(listener: () -> Unit) {
+        this.onBackspace = listener
+    }
+
+    private fun KeyboardView.setOnEnterListener(listener: () -> Unit) {
+        this.onEnter = listener
     }
 }

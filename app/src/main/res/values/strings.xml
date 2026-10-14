@@ -27,4 +27,6 @@
     <string name="keyboard_mic_processing">Transcribing…</string>
     <string name="keyboard_error_prefix">Error: </string>
     <string name="keyboard_switch_keyboard">Switch Keyboard</string>
+    <string name="keyboard_backspace">Backspace</string>
+    <string name="keyboard_enter">Enter</string>
 </resources>
