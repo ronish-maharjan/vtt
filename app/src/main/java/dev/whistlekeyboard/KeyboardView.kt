@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 /**
- * Keyboard view with microphone button, backspace, enter, and switch keyboard hint.
+ * Keyboard view with microphone button, backspace, enter, space, and switch keyboard hint.
  * Normal keyboard size (not fullscreen).
  */
 class KeyboardView(
@@ -39,6 +39,7 @@ class KeyboardView(
     private var micButton: Button? = null
     private var backspaceButton: Button? = null
     private var enterButton: Button? = null
+    private var spaceButton: Button? = null
     private var recordingIndicator: View? = null
     private var processingIndicator: ProgressBar? = null
     private var errorIcon: TextView? = null
@@ -50,6 +51,7 @@ class KeyboardView(
     var onSwitchKeyboard: (() -> Unit)? = null
     var onBackspace: (() -> Unit)? = null
     var onEnter: (() -> Unit)? = null
+    var onSpace: (() -> Unit)? = null
 
     // Animation
     private var pulseAnimation: Animation? = null
@@ -69,6 +71,7 @@ class KeyboardView(
         micButton = findViewById(R.id.micButton)
         backspaceButton = findViewById(R.id.backspaceButton)
         enterButton = findViewById(R.id.enterButton)
+        spaceButton = findViewById(R.id.spaceButton)
         recordingIndicator = findViewById(R.id.recordingIndicator)
         processingIndicator = findViewById(R.id.processingIndicator)
         errorIcon = findViewById(R.id.errorIcon)
@@ -91,6 +94,10 @@ class KeyboardView(
 
         enterButton?.setOnClickListener {
             onEnter?.invoke()
+        }
+
+        spaceButton?.setOnClickListener {
+            onSpace?.invoke()
         }
 
         switchKeyboardHint?.setOnClickListener {
@@ -153,6 +160,7 @@ class KeyboardView(
         }
         backspaceButton?.isEnabled = true
         enterButton?.isEnabled = true
+        spaceButton?.isEnabled = true
         hideAllIndicators()
         errorMessageView?.visibility = View.GONE
         switchKeyboardHint?.visibility = View.VISIBLE
@@ -165,6 +173,7 @@ class KeyboardView(
         }
         backspaceButton?.isEnabled = false
         enterButton?.isEnabled = false
+        spaceButton?.isEnabled = false
         hideAllIndicators()
         recordingIndicator?.visibility = View.VISIBLE
         recordingIndicator?.startAnimation(pulseAnimation)
@@ -179,6 +188,7 @@ class KeyboardView(
         }
         backspaceButton?.isEnabled = false
         enterButton?.isEnabled = false
+        spaceButton?.isEnabled = false
         hideAllIndicators()
         processingIndicator?.visibility = View.VISIBLE
         processingIndicator?.startAnimation(rotateAnimation)
@@ -193,6 +203,7 @@ class KeyboardView(
         }
         backspaceButton?.isEnabled = true
         enterButton?.isEnabled = true
+        spaceButton?.isEnabled = true
         hideAllIndicators()
         errorIcon?.visibility = View.VISIBLE
         errorMessageView?.apply {

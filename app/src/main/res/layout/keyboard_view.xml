@@ -22,96 +22,117 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <!-- Main area with microphone button -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:minHeight="120dp">
-
-            <Button
-                android:id="@+id/micButton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:background="@drawable/mic_button_background"
-                android:contentDescription="@string/keyboard_mic_idle"
-                android:stateListAnimator="@null" />
-
-            <!-- Recording indicator overlay -->
-            <View
-                android:id="@+id/recordingIndicator"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:background="@drawable/recording_indicator"
-                android:visibility="gone" />
-
-            <!-- Processing indicator overlay -->
-            <ProgressBar
-                android:id="@+id/processingIndicator"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="gone" />
-
-            <!-- Error icon overlay -->
-            <TextView
-                android:id="@+id/errorIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="!"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <!-- Bottom row: Backspace and Enter buttons -->
+        <!-- Main area with microphone button and right side buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginBottom="8dp">
+            android:gravity="center_vertical"
+            android:minHeight="120dp">
 
-            <Button
-                android:id="@+id/backspaceButton"
+            <!-- Center: microphone button -->
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/action_button_background"
-                android:contentDescription="@string/keyboard_backspace"
-                android:stateListAnimator="@null"
-                android:drawableStart="@drawable/ic_backspace"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:paddingHorizontal="16dp"
-                android:text="@string/keyboard_backspace"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_gravity="center_horizontal"
+                android:minHeight="120dp">
 
-            <Button
-                android:id="@+id/enterButton"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/action_button_background"
-                android:contentDescription="@string/keyboard_enter"
-                android:stateListAnimator="@null"
-                android:drawableStart="@drawable/ic_enter"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:paddingHorizontal="16dp"
-                android:text="@string/keyboard_enter"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                <Button
+                    android:id="@+id/micButton"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/mic_button_background"
+                    android:contentDescription="@string/keyboard_mic_idle"
+                    android:stateListAnimator="@null" />
+
+                <!-- Recording indicator overlay -->
+                <View
+                    android:id="@+id/recordingIndicator"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/recording_indicator"
+                    android:visibility="gone" />
+
+                <!-- Processing indicator overlay -->
+                <ProgressBar
+                    android:id="@+id/processingIndicator"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+                <!-- Error icon overlay -->
+                <TextView
+                    android:id="@+id/errorIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="!"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- Right column: Enter (top) and Backspace (bottom) -->
+            <LinearLayout
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/enterButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/action_button_background"
+                    android:contentDescription="@string/keyboard_enter"
+                    android:stateListAnimator="@null"
+                    android:drawableStart="@drawable/ic_enter"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/keyboard_enter"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/backspaceButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/action_button_background"
+                    android:contentDescription="@string/keyboard_backspace"
+                    android:stateListAnimator="@null"
+                    android:drawableStart="@drawable/ic_backspace"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/keyboard_backspace"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
+
+        <!-- Bottom row: full-width Space button -->
+        <Button
+            android:id="@+id/spaceButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/action_button_background"
+            android:contentDescription="@string/keyboard_space"
+            android:stateListAnimator="@null"
+            android:gravity="center"
+            android:text="@string/keyboard_space"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <!-- Error message -->
         <TextView

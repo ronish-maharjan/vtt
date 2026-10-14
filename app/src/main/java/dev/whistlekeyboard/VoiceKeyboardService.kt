@@ -41,6 +41,7 @@ class VoiceKeyboardService : InputMethodService() {
             setOnSwitchKeyboardListener { onSwitchKeyboard() }
             setOnBackspaceListener { onBackspace() }
             setOnEnterListener { onEnter() }
+            setOnSpaceListener { onSpace() }
         }
         return keyboardView!!
     }
@@ -144,6 +145,17 @@ class VoiceKeyboardService : InputMethodService() {
         }
     }
 
+    private fun onSpace() {
+        val inputConnection = pendingInputConnection ?: currentInputConnection
+        inputConnection?.let {
+            // Insert space character
+            it.commitText(" ", 1)
+            Log.d(TAG, "Space")
+        } ?: run {
+            Log.w(TAG, "No input connection for space")
+        }
+    }
+
     private fun checkRecordingPermission(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
     }
@@ -214,5 +226,9 @@ class VoiceKeyboardService : InputMethodService() {
 
     private fun KeyboardView.setOnEnterListener(listener: () -> Unit) {
         this.onEnter = listener
+    }
+
+    private fun KeyboardView.setOnSpaceListener(listener: () -> Unit) {
+        this.onSpace = listener
     }
 }
