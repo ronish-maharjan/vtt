@@ -3,6 +3,7 @@ package dev.whistlekeyboard
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
@@ -50,6 +51,8 @@ class KeyboardView(
     var onMicTap: (() -> Unit)? = null
     var onSwitchKeyboard: (() -> Unit)? = null
     var onBackspace: (() -> Unit)? = null
+    var onBackspaceRepeatStart: (() -> Unit)? = null
+    var onBackspaceRepeatStop: (() -> Unit)? = null
     var onEnter: (() -> Unit)? = null
     var onSpace: (() -> Unit)? = null
 
@@ -82,14 +85,24 @@ class KeyboardView(
             onMicTap?.invoke()
         }
 
-        backspaceButton?.setOnClickListener {
-            onBackspace?.invoke()
-        }
-
-        // Long press for continuous deletion
-        backspaceButton?.setOnLongClickListener {
-            onBackspace?.invoke()
-            true
+        backspaceButton?.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    onBackspace?.invoke()
+                    // Start repeating after delay
+                    backspaceButton?.postDelayed({
+                        if (backspaceButton?.isPressed == true) {
+                            onBackspaceRepeatStart?.invoke()
+                        }
+                    }, 400)
+                    true
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    onBackspaceRepeatStop?.invoke()
+                    true
+                }
+            }
+            false
         }
 
         enterButton?.setOnClickListener {

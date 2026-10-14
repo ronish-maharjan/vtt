@@ -40,6 +40,8 @@ class VoiceKeyboardService : InputMethodService() {
             setOnMicTapListener { onMicTapped() }
             setOnSwitchKeyboardListener { onSwitchKeyboard() }
             setOnBackspaceListener { onBackspace() }
+            setOnBackspaceRepeatStartListener { startBackspaceRepeat() }
+            setOnBackspaceRepeatStopListener { stopBackspaceRepeat() }
             setOnEnterListener { onEnter() }
             setOnSpaceListener { onSpace() }
         }
@@ -122,15 +124,34 @@ class VoiceKeyboardService : InputMethodService() {
         imm.showInputMethodPicker()
     }
 
+    private var backspaceRepeatRunnable: Runnable? = null
+
     private fun onBackspace() {
         val inputConnection = pendingInputConnection ?: currentInputConnection
         inputConnection?.let {
-            // Delete one character before cursor
-            it.deleteSurroundingText(1, 0)
+            // Send delete key event - handles selected text automatically
+            it.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DEL))
+            it.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DEL))
             Log.d(TAG, "Backspace")
         } ?: run {
             Log.w(TAG, "No input connection for backspace")
         }
+    }
+
+    private fun startBackspaceRepeat() {
+        stopBackspaceRepeat()
+        backspaceRepeatRunnable = object : Runnable {
+            override fun run() {
+                onBackspace()
+                handler.postDelayed(this, 50) // Repeat every 50ms
+            }
+        }
+        handler.postDelayed(backspaceRepeatRunnable!!, 400) // Start repeating after 400ms
+    }
+
+    private fun stopBackspaceRepeat() {
+        backspaceRepeatRunnable?.let { handler.removeCallbacks(it) }
+        backspaceRepeatRunnable = null
     }
 
     private fun onEnter() {
@@ -230,5 +251,13 @@ class VoiceKeyboardService : InputMethodService() {
 
     private fun KeyboardView.setOnSpaceListener(listener: () -> Unit) {
         this.onSpace = listener
+    }
+
+    private fun KeyboardView.setOnBackspaceRepeatStartListener(listener: () -> Unit) {
+        this.onBackspaceRepeatStart = listener
+    }
+
+    private fun KeyboardView.setOnBackspaceRepeatStopListener(listener: () -> Unit) {
+        this.onBackspaceRepeatStop = listener
     }
 }
