@@ -74,7 +74,7 @@
                     android:visibility="gone" />
             </FrameLayout>
 
-            <!-- Right column: Enter (top) and Backspace (bottom) -->
+            <!-- Right column: Backspace (top) and Enter (bottom) -->
             <LinearLayout
                 android:id="@+id/rightButtonColumn"
                 android:layout_width="56dp"
@@ -85,14 +85,14 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/enterButton"
+                    android:id="@+id/backspaceButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/circle_action_button_background"
-                    android:contentDescription="@string/keyboard_enter"
+                    android:contentDescription="@string/keyboard_backspace"
                     android:stateListAnimator="@null"
-                    android:drawableStart="@drawable/ic_enter"
+                    android:drawableStart="@drawable/ic_backspace"
                     android:drawablePadding="0dp"
                     android:gravity="center"
                     android:padding="0dp"
@@ -100,13 +100,13 @@
                     android:textSize="0sp" />
 
                 <Button
-                    android:id="@+id/backspaceButton"
+                    android:id="@+id/enterButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/circle_action_button_background"
-                    android:contentDescription="@string/keyboard_backspace"
+                    android:contentDescription="@string/keyboard_enter"
                     android:stateListAnimator="@null"
-                    android:drawableStart="@drawable/ic_backspace"
+                    android:drawableStart="@drawable/ic_enter"
                     android:drawablePadding="0dp"
                     android:gravity="center"
                     android:padding="0dp"
