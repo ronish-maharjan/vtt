@@ -10,7 +10,6 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -39,8 +38,8 @@ class KeyboardView(
 
     // Views
     private var micButton: Button? = null
-    private var backspaceButton: ImageButton? = null
-    private var enterButton: ImageButton? = null
+    private var backspaceButton: Button? = null
+    private var enterButton: Button? = null
     private var spaceButton: Button? = null
     private var recordingIndicator: View? = null
     private var processingIndicator: ProgressBar? = null

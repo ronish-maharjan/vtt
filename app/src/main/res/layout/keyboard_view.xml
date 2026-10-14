@@ -77,35 +77,41 @@
             <!-- Right column: Backspace (top) and Enter (bottom) -->
             <LinearLayout
                 android:id="@+id/rightButtonColumn"
-                android:layout_width="56dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-                <ImageButton
+                <Button
                     android:id="@+id/backspaceButton"
-                    android:layout_width="48dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/circle_action_button_background"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/pill_action_button_background"
                     android:contentDescription="@string/keyboard_backspace"
                     android:stateListAnimator="@null"
-                    android:src="@drawable/ic_backspace"
-                    android:scaleType="centerInside"
-                    android:padding="12dp" />
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/keyboard_backspace"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/enterButton"
-                    android:layout_width="48dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:background="@drawable/circle_action_button_background"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/pill_action_button_background"
                     android:contentDescription="@string/keyboard_enter"
                     android:stateListAnimator="@null"
-                    android:src="@drawable/ic_enter"
-                    android:scaleType="centerInside"
-                    android:padding="12dp" />
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/keyboard_enter"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
         </RelativeLayout>
 
