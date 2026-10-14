@@ -20,17 +20,17 @@ class AudioRecorderTest {
         assertEquals("fmt ", String(header, 12, 4))
         assertEquals("data", String(header, 36, 4))
 
-        // Check format fields
+        // Check format fields using ByteBuffer (match production code)
         val buffer = java.nio.ByteBuffer.wrap(header)
         buffer.order(java.nio.ByteOrder.LITTLE_ENDIAN)
 
         buffer.position(20)
-        assertEquals(1, buffer.getShort()) // AudioFormat (PCM)
-        assertEquals(1, buffer.getShort()) // NumChannels (mono)
+        assertEquals(1.toShort(), buffer.getShort()) // AudioFormat (PCM)
+        assertEquals(1.toShort(), buffer.getShort()) // NumChannels (mono)
         assertEquals(sampleRate, buffer.getInt()) // SampleRate
         assertEquals(sampleRate * 2, buffer.getInt()) // ByteRate
-        assertEquals(2, buffer.getShort()) // BlockAlign
-        assertEquals(16, buffer.getShort()) // BitsPerSample
+        assertEquals(2.toShort(), buffer.getShort()) // BlockAlign
+        assertEquals(16.toShort(), buffer.getShort()) // BitsPerSample
 
         buffer.position(40)
         assertEquals(dataSize.toInt(), buffer.getInt()) // Subchunk2Size
