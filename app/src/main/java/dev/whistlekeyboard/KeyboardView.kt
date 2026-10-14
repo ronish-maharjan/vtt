@@ -19,10 +19,10 @@ import androidx.core.content.ContextCompat
  */
 class KeyboardView(
     context: Context,
-    attrs: AttributeSet,
+    attrs: AttributeSet?,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {  
-    @JvmOverloads constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
+    @JvmOverloads constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     enum class State {
         IDLE,
